@@ -10,6 +10,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
+        Home
         <input onChange={e => this.setState({ data: e.target.value })}></input>
         { this.state.data}
       </div>
