@@ -1,8 +1,11 @@
 import React from 'react';
-import { List, Space } from 'antd';
+import { List, Button } from 'antd';
 import 'antd/lib/list/style/css'
-import 'antd/lib/space/style/css'
-import { StarOutlined } from '@ant-design/icons';
+import 'antd/lib/button/style/css'
+import { ReloadOutlined } from '@ant-design/icons'
+import { connect } from 'react-redux'
+import Post from './Post'
+import { getNews } from '../store/actionCreators'
 
 const news = [];
 for (let i = 0; i < 23; i++) {
@@ -17,38 +20,48 @@ for (let i = 0; i < 23; i++) {
   });
 }
 
-const IconText = ({ icon, text }) => (
-  <Space>
-    {React.createElement(icon)}
-    {text}
-  </Space>
-);
+
 class Home extends React.Component {
+  componentDidMount() {
+    this.props.getNews()
+  }
+
   render() {
     return (
-      <List
-        className="sm:mx-20 md:mx-42 lg:mx-52"
-        itemLayout="vertical"
-        size="large"
-        dataSource={news}
-        renderItem={item => (
-          <List.Item
-            key={item.title}
-            actions={[<IconText icon={StarOutlined} text="156" />]}
-          >
-            <List.Item.Meta
-              title={<a href={item.href}>{item.title}</a>}
-              description={
-                <div className="-mt-3">
-                  13.03.2020 cpeterso
-                </div>
-              }
-            />
-          </List.Item>
-        )}
-      />
+      <div>
+        <header className="w-full h-14 bg-blue-500 flex items-center">
+          <Button
+            className="ml-auto mr-14"
+            onClick={() => !this.props.loading && this.props.getNews()}
+            loading={this.props.loading}
+            size="large"
+            type="primary"
+            shape="circle"
+            icon={<ReloadOutlined style={{ fontSize: 18 }} className="mb-2" />}
+          />
+        </header>
+        <List
+          className="sm:mx-20 md:mx-42 lg:mx-52"
+          itemLayout="vertical"
+          size="large"
+          rowKey={id => id}
+          dataSource={this.props.news}
+          renderItem={item => <Post newsId={item} />}
+        />
+      </div>
     )
   }
 }
 
-export default Home
+function mapStateToProps(state) {
+  return {
+    news: state.news.news,
+    loading: state.news.loading
+  }
+}
+
+const mapDispatchToProps = {
+  getNews
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
