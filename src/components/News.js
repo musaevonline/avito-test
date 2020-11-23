@@ -76,7 +76,7 @@ class Home extends React.Component {
                                 description={
                                     <div className="-mt-2">
                                         {new Date(this.state.data.time * 1000).toLocaleDateString('ru')} {this.state.data.by}
-                                        <p><a>{this.state.data.url}</a></p>
+                                        <p><a href={this.state.data.url}>{this.state.data.url}</a></p>
                                     </div>
                                 }
                             />

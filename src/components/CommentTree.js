@@ -1,5 +1,6 @@
 import React from 'react'
 import { Comment as AntComment, Spin } from 'antd';
+import { RightOutlined, DownOutlined } from '@ant-design/icons'
 import 'antd/lib/comment/style/css'
 import 'antd/lib/avatar/style/css'
 import 'antd/lib/spin/style/css'
@@ -37,12 +38,17 @@ class Comment extends React.Component {
                     onClick={() => this.setState({ collapsed: false })}
                     author={`${this.state.data.by} ${new Date(this.state.data.time * 1000).toLocaleDateString('ru')}`}
                     content={this.state.data.text}
+                    avatar={
+                        this.state.data.kids ?
+                            (this.state.collapsed ? <RightOutlined /> : <DownOutlined />)
+                            : null
+                    }
                 >
                     {!this.state.collapsed && <CommentTree kids={this.state.data.kids} />}
                 </AntComment>
             )
         } else {
-            return <Spin />
+            return <div><Spin className="my-3" /></div>
         }
     }
 }
