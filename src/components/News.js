@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Space } from 'antd'
+import { Card, Space, Spin } from 'antd'
 import 'antd/lib/card/style/css'
 import 'antd/lib/space/style/css'
 import 'antd/lib/spin/style/css'
@@ -88,7 +88,7 @@ class Home extends React.Component {
             )
         } else {
             return (
-                <div>Загрузка...</div>
+                <Spin className="block mx-auto my-20" />
             )
         }
     }

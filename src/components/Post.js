@@ -1,7 +1,8 @@
 import React from 'react'
-import { List, Space } from 'antd';
+import { List, Space, Spin } from 'antd';
 import 'antd/lib/list/style/css'
 import 'antd/lib/space/style/css'
+import 'antd/lib/spin/style/css'
 import { StarOutlined, MessageOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -60,9 +61,7 @@ class Post extends React.Component {
                 </List.Item>
             )
         } else {
-            return (
-                <div>Загрузка...</div>
-            )
+            return <div><Spin className="my-3"/></div>
         }
 
     }

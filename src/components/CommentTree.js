@@ -1,7 +1,8 @@
 import React from 'react'
-import { Comment as AntComment } from 'antd';
+import { Comment as AntComment, Spin } from 'antd';
 import 'antd/lib/comment/style/css'
 import 'antd/lib/avatar/style/css'
+import 'antd/lib/spin/style/css'
 import axios from 'axios'
 import classNames from 'classnames'
 
@@ -41,7 +42,7 @@ class Comment extends React.Component {
                 </AntComment>
             )
         } else {
-            return <div>'Загрузка...'</div>
+            return <Spin />
         }
     }
 }
