@@ -1,44 +1,35 @@
 import React from 'react';
-import { List, Button } from 'antd';
+import { List } from 'antd';
 import 'antd/lib/list/style/css'
-import 'antd/lib/button/style/css'
 import { ReloadOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import Post from './Post'
 import { getNews } from '../store/actionCreators'
 
-const news = [];
-for (let i = 0; i < 23; i++) {
-  news.push({
-    href: 'https://ant.design',
-    title: `ant design part ${i}`,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    description:
-      'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-    content:
-      'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-  });
-}
 
-
+let timer = null
 class Home extends React.Component {
   componentDidMount() {
     this.props.getNews()
+    if (!timer) {
+      timer = setInterval(this.props.getNews, 60000)
+    }
   }
 
   render() {
     return (
       <div>
         <header className="w-full h-14 bg-blue-500 flex items-center">
-          <Button
-            className="ml-auto mr-14"
-            onClick={() => !this.props.loading && this.props.getNews()}
-            loading={this.props.loading}
-            size="large"
-            type="primary"
-            shape="circle"
-            icon={<ReloadOutlined style={{ fontSize: 18 }} className="mb-2" />}
-          />
+          <span className={`ml-auto mr-14 ${this.props.loading ? 'animate-spin' : ''}`}>
+            <ReloadOutlined
+              className={`transform transition-all 
+                          hover:scale-105 text-white p-2 cursor-pointer
+                          rounded-full text-2xl leading-none
+                          ${this.props.loading ? 'bg-transparent' : 'hover:bg-blue-400'}
+                       `}
+              onClick={() => !this.props.loading && this.props.getNews()}
+            />
+          </span>
         </header>
         <List
           className="sm:mx-20 md:mx-42 lg:mx-52"
