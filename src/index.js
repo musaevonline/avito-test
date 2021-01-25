@@ -13,8 +13,8 @@ ReactDOM.render(
     <Provider store={store}>
       <Suspense fallback={<Spin className="block mx-auto my-20" />}>
         <BrowserRouter>
-          <Route path="/" exact component={React.lazy(() => import('./components/Home'))} />
-          <Route path="/:id" exact component={React.lazy(() => import('./components/News'))} />
+          <Route path="/avito-test" exact component={React.lazy(() => import('./components/Home'))} />
+          <Route path="/avito-test/:id" exact component={React.lazy(() => import('./components/News'))} />
         </BrowserRouter>
       </Suspense>
     </Provider>
