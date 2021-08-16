@@ -6,8 +6,8 @@
     <script>
       location.replace(
         location.href.replace(
-          new RegExp("%PUBLIC_URL%(.*)"),
-          "%PUBLIC_URL%\/?$1"
+          new RegExp(`${PUBLIC_URL}(.*)`),
+          `${PUBLIC_URL}\/?$1`
         )
       );
     </script>
