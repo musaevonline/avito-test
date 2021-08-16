@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Single Page Apps for GitHub Pages</title>
+    <script>
+      const PUBLIC_URL = "avito-test";
+      location.replace(
+        location.href.replace(
+          new RegExp(`${PUBLIC_URL}(.*)`),
+          `${PUBLIC_URL}\/?$1`
+        )
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
