@@ -12,9 +12,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Suspense fallback={<Spin className="block mx-auto my-20" />}>
-        <BrowserRouter>
-          <Route path="/avito-test" exact component={React.lazy(() => import('./components/Home'))} />
-          <Route path="/avito-test/:id" exact component={React.lazy(() => import('./components/News'))} />
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
+          <Route path="/" exact component={React.lazy(() => import('./components/Home'))} />
+          <Route path="/:id" exact component={React.lazy(() => import('./components/News'))} />
         </BrowserRouter>
       </Suspense>
     </Provider>
